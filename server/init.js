@@ -6,7 +6,9 @@ import http from 'http';
 
 export default class Server {
     constructor(config, router) {
-        this.server = http.createServer(router.entry);
+        this.server = http.createServer((req, res) => {
+            router.serve(req, res);
+        });
         this.config = config;
     }
 

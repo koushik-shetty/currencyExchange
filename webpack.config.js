@@ -5,10 +5,8 @@ var outDir = 'dist';
 
 var commonConfig = {
 	entry: {
-		// realeyesCurrencyExchangeClient: './index',
 		realeyesCurrencyExchangeServer: './index.server',
 	},
-	target: 'node',
 	output: {
 		path: path.resolve(__dirname, outDir),
 		filename: '[name].js',
@@ -56,6 +54,7 @@ var client = Object.assign({}, commonConfig, {
 	entry: {
 		realeyesCurrencyExchangeClient: './index',
 	},
+
 });
 
 //Multiple configs
