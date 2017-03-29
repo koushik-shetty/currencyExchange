@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-console.log("ehllo woeksldfj")
-let Elet = (props) => <div>This is good {props.one} enough</div>
-class Rdr extends Component {
-    render() {
-        return (
-            <div>
-                this is awesone: {this.props.one}
-            </div>
-        );
-    }
-}
+import reducers from './client/reducers/';
+import App from './client/App.jsx';
 
-ReactDOM.render(<Rdr one="yay!!" />, document.getElementById('root'));
+var store = createStore(reducers);
+
+ReactDOM.render(
+    <Provider store={store} >
+        <App />
+    </Provider>
+    , document.getElementById('root')
+);
