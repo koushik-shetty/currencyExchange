@@ -23,7 +23,6 @@ export function ExchangeEndpoint(onSuccess, onFailure) {
         }
     })
     .catch(response => {
-        console.log("rej:", response);
         onFailure(response.data);
     });
 }

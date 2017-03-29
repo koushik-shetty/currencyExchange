@@ -24,7 +24,6 @@ export default function exchangeHistory(req, res) {
                 return;
             }
             success(res, JSON.stringify(flattenHistoryReponse(result)));
-            console.log('sendeer:',flattenHistoryReponse(result));
         });
     }, (errorData) => {
         error(res);
@@ -44,7 +43,6 @@ function getProvider(json) {
     const envelope = json['gesmes:Envelope'];
     const sender = envelope && envelope['gesmes:Sender'].length > 0 && envelope['gesmes:Sender'][0];
     return (sender && sender['gesmes:name'].length > 0 && sender['gesmes:name'][0]) || '';
-
 }
 
 function getHistory(json) {

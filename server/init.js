@@ -14,7 +14,7 @@ export default class Server {
 
     start(startCb, errorCb){
         this.server.listen(this.config.port, this.config.hostname, () => {
-            console.info(`currencyExchangeRealeyes Server listening at port:${this.config.port}`)
+            console.info(`currencyExchangeRealeyes Server listening at port:${this.config.port}`);
         });
     }
 }

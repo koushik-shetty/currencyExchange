@@ -20,7 +20,6 @@ export default class CERouter{
     }
 
     serve(req, res) {
-        console.log('req:', req.url);
         this.router(req, res, finalHandler(req, res));
     }
 }
