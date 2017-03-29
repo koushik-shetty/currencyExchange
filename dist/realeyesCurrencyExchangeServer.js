@@ -5991,7 +5991,6 @@ var CERouter = function () {
     }, {
         key: 'serve',
         value: function serve(req, res) {
-            console.log('req:', req.url);
             this.router(req, res, (0, _finalhandler2.default)(req, res));
         }
     }]);
@@ -7344,7 +7343,6 @@ function ExchangeEndpoint(onSuccess, onFailure) {
             Promise.reject(response);
         }
     }).catch(function (response) {
-        console.log("rej:", response);
         onFailure(response.data);
     });
 }
@@ -7386,18 +7384,46 @@ function exchangeHistory(req, res) {
                 error(res);
                 return;
             }
-            console.log('sendeer:', result['gesmes:Envelope']['gesmes:Sender'][0]['gesmes:name'][0]);
-            success(res, JSON.stringify(result));
+            success(res, JSON.stringify(flattenHistoryReponse(result)));
         });
     }, function (errorData) {
         error(res);
     });
 }
 
-function flattenJson(json) {
-    var currencies = {
-        provider: json.gesmes.Envelope.gesmes.sender
+function flattenHistoryReponse(json) {
+    var history = getHistory(json);
+    return {
+        provider: getProvider(json),
+        latestRate: history[0],
+        history: history
     };
+}
+
+function getProvider(json) {
+    var envelope = json['gesmes:Envelope'];
+    var sender = envelope && envelope['gesmes:Sender'].length > 0 && envelope['gesmes:Sender'][0];
+    return sender && sender['gesmes:name'].length > 0 && sender['gesmes:name'][0] || '';
+}
+
+function getHistory(json) {
+    var envelope = json['gesmes:Envelope'];
+    var history = envelope && envelope['Cube'].length > 0 && envelope['Cube'][0].Cube;
+    return history.map(function (singleDay) {
+        return {
+            date: singleDay.$.time,
+            rates: singleDay.Cube.map(function (currency) {
+                if (currency) {
+                    return {
+                        currency: currency.$.currency,
+                        rate: currency.$.rate
+                    };
+                }
+            }).filter(function (rate) {
+                return rate != undefined;
+            })
+        };
+    });
 }
 
 /***/ }),

@@ -1,0 +1,19 @@
+.spinner-container {
+    text-align: center;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+}
+
+.sk-rotating-plane {
+    width: 60px;
+    height: 60px;
+}
+
+.sk-circle {
+    width: 60px;
+    height: 60px;
+}
