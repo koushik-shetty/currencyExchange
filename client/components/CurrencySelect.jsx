@@ -15,8 +15,8 @@ export default class CurrencySelect extends Component {
 
     render() {
         return (
-            <div>
-                <select name={this.props.name} id={this.props.id} onChange={this._onChange}>
+            <div className="currency-select-container">
+                <select className="currency-select" name={this.props.name} id={this.props.id} onChange={this._onChange}>
                     {
                         this.props.currencies
                             .map(currency =>
@@ -32,7 +32,7 @@ export default class CurrencySelect extends Component {
 }
 
 CurrencySelect.propTypes = {
-    list: PropTypes.array,
+    currencies: PropTypes.array,
     name: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
     onSelect: PropTypes.func,
